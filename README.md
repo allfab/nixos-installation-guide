@@ -15,8 +15,6 @@
 sudo -i
 ```
 
----
-
 ## Préparations
 
 ### Support d'installation
@@ -28,9 +26,9 @@ sudo -i
     - Placez le fichier ISO et le fichier de somme de contrôle dans le même dossier.
     - Exécutez :
     
-    ```sh
-    sha256sum -c <checksum-file>
-    ```
+        ```sh
+        sha256sum -c <checksum-file>
+        ```
   
     - Assurez-vous que la sortie indique que le fichier ISO est `OK`. Si la vérification échoue, téléchargez à nouveau les fichiers ISO et de somme de contrôle et répétez le processus de vérification.
 
