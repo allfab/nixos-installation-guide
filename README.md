@@ -1,5 +1,73 @@
 # Guide d'installation de NixOS
 
+## Introduction
+
+**Prérequis :**
+
+- **Partitionnement de disque LVM** pour plus de flexibilité dans la gestion du stockage,
+- **Chargeur de démarrage UEFI** et **partition de démarrage**,
+- **Installation via clé USB**,
+- **Connexion à Internet via WiFi** (en particulier WPA) si on n'a pas la possibilité de se connecter via Ethernet,
+- **Installation complète sur un disque** (pas de dual boot).
+
+**Important :** Toutes les commandes doivent être exécutées en tant qu'utilisateur `root` :
+```sh
+sudo -i
+```
+
+---
+
+## Préparations
+
+### Support d'installation
+
+1. **Téléchargez le CD d'installation minimal 64 bits** depuis la [page de téléchargement de NixOS](https://nixos.org/download.html),
+2. **Vérifiez l'intégrité de l'ISO** :
+
+  - Téléchargez le fichier de somme de contrôle SHA256 depuis la même page.
+  - Placez le fichier ISO et le fichier de somme de contrôle dans le même dossier.
+  - Exécutez :
+  
+  ```sh
+  sha256sum -c <checksum-file>
+  ```
+
+  - Assurez-vous que la sortie indique que le fichier ISO est `OK`. Si la vérification échoue, téléchargez à nouveau les fichiers ISO et de somme de contrôle et répétez le processus de vérification.
+
+3. **Créer une clé USB bootable**
+
+  - Pensez à utiliser [Ventoy](https://www.ventoy.net/en/index.html "Installez simplement Ventoy sur votre clé USB et copiez-y n'importe quel nombre de fichiers ISO. Vous pouvez ensuite facilement démarrer à partir de n'importe lequel d'entre eux.") pour plus de flexibilité.
+  - Vous pouvez également utiliser la ligne de commande :
+
+  1. Identifiez votre clé USB :
+  
+  ```sh
+  lsblk
+  ```
+
+  2. Copiez l'ISO sur la clé USB (remplacez `$DISK` par votre clé USB) :
+  
+  ```sh
+  sudo dd if=<ISO_FILE> of=$DISK bs=1M status=progress
+  ```
+
+  **Remarque :** cette commande effacera toutes les données de la clé USB. Remplacez `<ISO_FILE>` par le nom de votre fichier ISO.
+
+---
+
+### Configuration du système
+
+Certains paramètres système UEFI doivent être ajustés pour l'installation de NixOS. Pour trouver les étapes exactes pour votre machine, effectuez une recherche rapide sur le Web pour votre modèle. Par exemple, sur mon Framework, vous appuyez sur « F12 » au démarrage pour accéder au menu UEFI.
+
+Une fois dans le menu :
+
+1. **Assurez-vous que le démarrage sécurisé est désactivé**.
+2. **Assurez-vous que le démarrage rapide est désactivé**.
+3. **Assurez-vous que le mode UEFI est activé**.
+4. **Assurez-vous que le démarrage à partir de l'USB est activé**.
+
+---
+
 ## Processus d'installation
 
 Changer la disposition du clavier (passer d'un clavier QWERTY à un clavier AZERTY) :
