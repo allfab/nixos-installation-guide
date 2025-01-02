@@ -32,8 +32,12 @@ Blank out MBR? (Y/N): Y
 ```
 
 Identifiez le disque à partitionner :
-```
-# lsblk
+```bash
+[root@nixos:~]# lsblk 
+NAME  MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+loop0   7:0    0  1.1G  1 loop /nix/.ro-store
+sda     8:0    0   60G  0 disk 
+sr0    11:0    1  1.1G  0 rom  /iso
 ```
 
 Option 1°) BIOS/MBR (`fdisk`) :
