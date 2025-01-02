@@ -24,15 +24,15 @@ sudo -i
 1. **Téléchargez le CD d'installation minimal 64 bits** depuis la [page de téléchargement de NixOS](https://nixos.org/download.html),
 2. **Vérifiez l'intégrité de l'ISO** :
 
-  - Téléchargez le fichier de somme de contrôle SHA256 depuis la même page.
-  - Placez le fichier ISO et le fichier de somme de contrôle dans le même dossier.
-  - Exécutez :
+    - Téléchargez le fichier de somme de contrôle SHA256 depuis la même page.
+    - Placez le fichier ISO et le fichier de somme de contrôle dans le même dossier.
+    - Exécutez :
+    
+    ```sh
+    sha256sum -c <checksum-file>
+    ```
   
-  ```sh
-  sha256sum -c <checksum-file>
-  ```
-
-  - Assurez-vous que la sortie indique que le fichier ISO est `OK`. Si la vérification échoue, téléchargez à nouveau les fichiers ISO et de somme de contrôle et répétez le processus de vérification.
+    - Assurez-vous que la sortie indique que le fichier ISO est `OK`. Si la vérification échoue, téléchargez à nouveau les fichiers ISO et de somme de contrôle et répétez le processus de vérification.
 
 3. **Créer une clé USB bootable**
 
