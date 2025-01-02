@@ -11,7 +11,7 @@ sudo loadkeys fr-latin1
 
 Pour réinitialiser le disque, lancez `gdisk` et utilisez successivement les options `x` et `z` :
 ```bash
-root@nixos:~]# gdisk /dev/sda
+[root@nixos:~]# gdisk /dev/sda
 GPT fdisk (gdisk) version 1.0.10
 
 Partition table scan:
