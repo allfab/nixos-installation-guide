@@ -34,22 +34,22 @@ sudo -i
 
 3. **Créer une clé USB bootable**
 
-      - Pensez à utiliser [Ventoy](https://www.ventoy.net/en/index.html "Installez simplement Ventoy sur votre clé USB et copiez-y n'importe quel nombre de fichiers ISO. Vous pouvez ensuite facilement démarrer à partir de n'importe lequel d'entre eux.") pour plus de flexibilité.
-      - Vous pouvez également utiliser la ligne de commande :
+  - Pensez à utiliser [Ventoy](https://www.ventoy.net/en/index.html "Installez simplement Ventoy sur votre clé USB et copiez-y n'importe quel nombre de fichiers ISO. Vous pouvez ensuite facilement démarrer à partir de n'importe lequel d'entre eux.") pour plus de flexibilité.
+  - Vous pouvez également utiliser la ligne de commande :
 
     1. Identifiez votre clé USB :
     
-    ```sh
-    lsblk
-    ```
+        ```sh
+        lsblk
+        ```
     
     2. Copiez l'ISO sur la clé USB (remplacez `$DISK` par votre clé USB) :
     
-    ```sh
-    sudo dd if=<ISO_FILE> of=$DISK bs=1M status=progress
-    ```
-    
-    **Remarque :** cette commande effacera toutes les données de la clé USB. Remplacez `<ISO_FILE>` par le nom de votre fichier ISO.
+        ```sh
+        sudo dd if=<ISO_FILE> of=$DISK bs=1M status=progress
+        ```
+        
+        **Remarque :** cette commande effacera toutes les données de la clé USB. Remplacez `<ISO_FILE>` par le nom de votre fichier ISO.
 
 
 ### Configuration du système
