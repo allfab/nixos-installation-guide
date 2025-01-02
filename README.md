@@ -9,7 +9,27 @@ sudo loadkeys fr-latin1
 
 ## Partitionnement
 
-Pour réinitialiser le disque, lancez `gdisk` et utilisez successivement les options `x` et `z`.
+Pour réinitialiser le disque, lancez `gdisk` et utilisez successivement les options `x` et `z` :
+```bash
+root@nixos:~]# gdisk /dev/sda
+GPT fdisk (gdisk) version 1.0.10
+
+Partition table scan:
+  MBR: protective
+  BSD: not present
+  APM: not present
+  GPT: present
+
+Found valid GPT with protective MBR; using GPT.
+
+Command (? for help): x
+
+Expert command (? for help): z
+About to wipe out GPT on /dev/sda. Proceed? (Y/N): Y
+GPT data structures destroyed! You may now partition the disk using fdisk or
+other utilities.
+Blank out MBR? (Y/N): Y
+```
 
 Identifiez le disque à partitionner :
 ```
