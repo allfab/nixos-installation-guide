@@ -88,110 +88,109 @@ nixos login: nixos (automatic login)
 [nixos@nixos:~]$
 ```
 
-
 1. **Changer la disposition du clavier (passer d'un clavier QWERTY à un clavier AZERTY) :**
 
-```bash
-[nixos@nixos:~]$ sudo loadkeys fr-latin1
-```
+    ```bash
+    [nixos@nixos:~]$ sudo loadkeys fr-latin1
+    ```
 
 2. **Changement des mots de passe des utilisateurs `nixos` et `root` afin de pouvoir établir une connexion `ssh`** :
 
-Pour `nixos` :
-```bash
-[nixos@nixos:~]$ passwd 
-New password: 
-Retype new password:
-passwd: password updated successfully
-```
+    Pour `nixos` :
+    ```bash
+    [nixos@nixos:~]$ passwd 
+    New password: 
+    Retype new password:
+    passwd: password updated successfully
+    ```
 
-Pour `root`:
-```bash
-[nixos@nixos:~]$ sudo su -
+    Pour `root`:
+    ```bash
+    [nixos@nixos:~]$ sudo su -
 
-[root@nixos:~]# passwd 
-New password: 
-Retype new password: 
-passwd: password updated successfully
+    [root@nixos:~]# passwd 
+    New password: 
+    Retype new password: 
+    passwd: password updated successfully
 
-[root@nixos:~]#
-```
+    [root@nixos:~]#
+    ```
 
 3. **Configuration d'une connexion Wifi :**
 
-Si vous avez besoin d'une connexion sans fil, tapez :
+    Si vous avez besoin d'une connexion sans fil, tapez :
 
-  ```bash
-  [nixos@nixos:~]$ sudo systemctl start wpa_supplicant
-  ```
+    ```bash
+    [nixos@nixos:~]$ sudo systemctl start wpa_supplicant
+    ```
 
-Ensuite, configurez un réseau à l'aide de `wpa_cli` :
+    Ensuite, configurez un réseau à l'aide de `wpa_cli` :
 
-  ```bash
-  [nixos@nixos:~]$ wpa_cli
+    ```bash
+    [nixos@nixos:~]$ wpa_cli
 
-  add_network
-  0
-  set_network 0 ssid "myhomenetwork"
-  OK
-  set_network 0 psk "mypassword"
-  OK
-  set_network 0 key_mgmt WPA-PSK
-  OK
-  enable_network 0
-  OK
-  ```
+    add_network
+    0
+    set_network 0 ssid "myhomenetwork"
+    OK
+    set_network 0 psk "mypassword"
+    OK
+    set_network 0 key_mgmt WPA-PSK
+    OK
+    enable_network 0
+    OK
+    ```
 
-  Ensuite, quittez `wpa_cli` :
-  ```bash
-  quit
-  ```
+    Ensuite, quittez `wpa_cli` :
+    ```bash
+    quit
+    ```
 
 4. **Partitionnement LVM via `gdisk` :**
 
-Identifiez le disque à partitionner :
-```bash
-[root@nixos:~]# lsblk 
-NAME  MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
-loop0   7:0    0  1.1G  1 loop /nix/.ro-store
-sda     8:0    0   60G  0 disk 
-sr0    11:0    1  1.1G  0 rom  /iso
-```
+    Identifiez le disque à partitionner :
+    ```bash
+    [root@nixos:~]# lsblk 
+    NAME  MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+    loop0   7:0    0  1.1G  1 loop /nix/.ro-store
+    sda     8:0    0   60G  0 disk 
+    sr0    11:0    1  1.1G  0 rom  /iso
+    ```
 
-> [!NOTE]
-> Ici, nous utiliserons le disque `/dev/sda` de 60GB.
+    > [!NOTE]
+    > Ici, nous utiliserons le disque `/dev/sda` de 60GB.
 
-Pour réinitialiser le disque, lancez `gdisk` et utilisez successivement les options `x` et `z` :
-```bash
-[nixos@nixos:~]$ sudo su -
-[root@nixos:~]# gdisk /dev/sda
-GPT fdisk (gdisk) version 1.0.10
+    Pour réinitialiser le disque, lancez `gdisk` et utilisez successivement les options `x` et `z` :
+    ```bash
+    [nixos@nixos:~]$ sudo su -
+    [root@nixos:~]# gdisk /dev/sda
+    GPT fdisk (gdisk) version 1.0.10
 
-Partition table scan:
-  MBR: protective
-  BSD: not present
-  APM: not present
-  GPT: present
+    Partition table scan:
+      MBR: protective
+      BSD: not present
+      APM: not present
+      GPT: present
 
-Found valid GPT with protective MBR; using GPT.
+    Found valid GPT with protective MBR; using GPT.
 
-Command (? for help): x
+    Command (? for help): x
 
-Expert command (? for help): z
-About to wipe out GPT on /dev/sda. Proceed? (Y/N): Y
-GPT data structures destroyed! You may now partition the disk using fdisk or
-other utilities.
-Blank out MBR? (Y/N): Y
-```
+    Expert command (? for help): z
+    About to wipe out GPT on /dev/sda. Proceed? (Y/N): Y
+    GPT data structures destroyed! You may now partition the disk using fdisk or
+    other utilities.
+    Blank out MBR? (Y/N): Y
+    ```
 
-Schéma de partitionnement UEFI/GPT souhaité :
-```
-  Device        Start       End   Sectors  Size Type
-  /dev/sda1      2048    206847    204800  100M EFI System
-  /dev/sda2    206848   2303999   2097152    1G Linux filesystem
-  /dev/sda3   2304000  10692607   8388608    4G Linux swap
-  /dev/sda4  10692608 117229567 106536960 50.8G Linux filesystem
-```
+    Schéma de partitionnement UEFI/GPT souhaité :
+    ```
+      Device        Start       End   Sectors  Size Type
+      /dev/sda1      2048    206847    204800  100M EFI System
+      /dev/sda2    206848   2303999   2097152    1G Linux filesystem
+      /dev/sda3   2304000  10692607   8388608    4G Linux swap
+      /dev/sda4  10692608 117229567 106536960 50.8G Linux filesystem
+    ```
 
-> Idéalement, créez une partition `swap` égale à la quantité de RAM disponible
-> sur votre machine. Utilisez la commande `free -m` pour en savoir plus.
+    > Idéalement, créez une partition `swap` égale à la quantité de RAM disponible
+    > sur votre machine. Utilisez la commande `free -m` pour en savoir plus.
