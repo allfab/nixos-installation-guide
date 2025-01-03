@@ -11,8 +11,8 @@ Feuille de route pour un poste de travail sous NixOS.
 ## Préréglages / Configuration du système
 
 - [x] Changer la disposition du clavier (passer d'un clavier QWERTY à un clavier AZERTY)
-- [x] Configuration d'une connexion Wifi
 - [x] Changement des mots de passe des utilisateurs `nixos` et `root` afin de pouvoir établir une connexion `ssh`
+- [x] Configuration d'une connexion Wifi
 - [ ] Partitionnement LVM via `gdisk`
 - [ ] Connection WIFI
 - [ ] Configuration SSH + Changement des mots de passe

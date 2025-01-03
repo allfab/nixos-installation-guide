@@ -95,8 +95,29 @@ nixos login: nixos (automatic login)
 [nixos@nixos:~]$ sudo loadkeys fr-latin1
 ```
 
+2. **Changement des mots de passe des utilisateurs `nixos` et `root` afin de pouvoir établir une connexion `ssh`** :
 
-2. **Configuration d'une connexion Wifi :**
+Pour `nixos` :
+```bash
+[nixos@nixos:~]$ passwd 
+New password: 
+Retype new password:
+passwd: password updated successfully
+```
+
+Pour `root`:
+```bash
+[nixos@nixos:~]$ sudo su -
+
+[root@nixos:~]# passwd 
+New password: 
+Retype new password: 
+passwd: password updated successfully
+
+[root@nixos:~]#
+```
+
+3. **Configuration d'une connexion Wifi :**
 
 Si vous avez besoin d'une connexion sans fil, tapez :
 
@@ -126,29 +147,7 @@ Ensuite, configurez un réseau à l'aide de `wpa_cli` :
   quit
   ```
 
-  3. **Changement des mots de passe des utilisateurs `nixos` et `root` afin de pouvoir établir une connexion `ssh`** :
-
-  Pour `nixos` :
-  ```bash
-  [nixos@nixos:~]$ passwd 
-  New password: 
-  Retype new password:
-  passwd: password updated successfully
-  ```
-
-  Pour `root`:
-  ```bash
-  [nixos@nixos:~]$ sudo su -
-
-  [root@nixos:~]# passwd 
-  New password: 
-  Retype new password: 
-  passwd: password updated successfully
-
-  [root@nixos:~]#
-  ```
-
-  4. **Partitionnement LVM via `gdisk` :**
+4. **Partitionnement LVM via `gdisk` :**
 
 Pour réinitialiser le disque, lancez `gdisk` et utilisez successivement les options `x` et `z` :
 ```bash
