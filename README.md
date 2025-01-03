@@ -185,11 +185,10 @@ nixos login: nixos (automatic login)
 
     Schéma de partitionnement UEFI/GPT souhaité :
     ```
-      Device        Start       End   Sectors  Size Type
-      /dev/sda1      2048    206847    204800  100M EFI System
-      /dev/sda2    206848   2303999   2097152    1G Linux filesystem
-      /dev/sda3   2304000  10692607   8388608    4G Linux swap
-      /dev/sda4  10692608 117229567 106536960 50.8G Linux filesystem
+    Number  Start (sector)    End (sector)  Size       Code  Name
+    1            2048         1050623   512.0 MiB   EF00  EFI system partition
+    2         1050624         3147775   1024.0 MiB  8300  Linux filesystem
+    3         3147776       125827071   58.5 GiB    8E00  Linux LVM
     ```
 
     > Idéalement, créez une partition `swap` égale à la quantité de RAM disponible
@@ -353,7 +352,7 @@ nixos login: nixos (automatic login)
             PV UUID               ExXNqK-QFPO-FRug-pzxT-3CBP-XspI-RX1sCF
             ```
 
-        2. Création du groupe de volume VG#
+        2. Création du groupe de volume VG :
 
             ```bash
             [root@nixos:~]# vgcreate nixos /dev/sda3
