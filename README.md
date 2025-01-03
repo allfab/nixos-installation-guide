@@ -149,6 +149,18 @@ Ensuite, configurez un réseau à l'aide de `wpa_cli` :
 
 4. **Partitionnement LVM via `gdisk` :**
 
+Identifiez le disque à partitionner :
+```bash
+[root@nixos:~]# lsblk 
+NAME  MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+loop0   7:0    0  1.1G  1 loop /nix/.ro-store
+sda     8:0    0   60G  0 disk 
+sr0    11:0    1  1.1G  0 rom  /iso
+```
+
+> [!NOTE]
+> Ici, nous utiliserons le disque `/dev/sda` de 60GB.
+
 Pour réinitialiser le disque, lancez `gdisk` et utilisez successivement les options `x` et `z` :
 ```bash
 [nixos@nixos:~]$ sudo su -
@@ -170,15 +182,6 @@ About to wipe out GPT on /dev/sda. Proceed? (Y/N): Y
 GPT data structures destroyed! You may now partition the disk using fdisk or
 other utilities.
 Blank out MBR? (Y/N): Y
-```
-
-Identifiez le disque à partitionner :
-```bash
-[root@nixos:~]# lsblk 
-NAME  MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
-loop0   7:0    0  1.1G  1 loop /nix/.ro-store
-sda     8:0    0   60G  0 disk 
-sr0    11:0    1  1.1G  0 rom  /iso
 ```
 
 Schéma de partitionnement UEFI/GPT souhaité :
