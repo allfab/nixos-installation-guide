@@ -89,23 +89,26 @@ nixos login: nixos (automatic login)
 ```
 
 
-1. Changer la disposition du clavier (passer d'un clavier QWERTY à un clavier AZERTY) :
+1. **Changer la disposition du clavier (passer d'un clavier QWERTY à un clavier AZERTY) :**
 
 ```bash
-[root@nixos:~]# loadkeys fr-latin1
+[nixos@nixos:~]$ sudo loadkeys fr-latin1
 ```
 
 
-2. **Démarrez le service `wpa_supplicant` et configurez le WiFi avec `wpa_cli` :**
+2. **Configuration d'une connexion Wifi :**
 
-```bash
-[root@nixos:~]# sudo systemctl start wpa_supplicant
-[root@nixos:~]# wpa_cli
-```
-
-Dans `wpa_cli`, saisissez :
+Si vous avez besoin d'une connexion sans fil, tapez :
 
   ```bash
+  [nixos@nixos:~]$ sudo systemctl start wpa_supplicant
+  ```
+
+Ensuite, configurez un réseau à l'aide de `wpa_cli` :
+
+  ```bash
+  [nixos@nixos:~]$ wpa_cli
+
   add_network
   0
   set_network 0 ssid "myhomenetwork"
@@ -123,10 +126,33 @@ Dans `wpa_cli`, saisissez :
   quit
   ```
 
-## Partitionnement du disque
+  3. **Changement des mots de passe des utilisateurs `nixos` et `root` afin de pouvoir établir une connexion `ssh`** :
+
+  Pour `nixos` :
+  ```bash
+  [nixos@nixos:~]$ passwd 
+  New password: 
+  Retype new password:
+  passwd: password updated successfully
+  ```
+
+  Pour `root`:
+  ```bash
+  [nixos@nixos:~]$ sudo su -
+
+  [root@nixos:~]# passwd 
+  New password: 
+  Retype new password: 
+  passwd: password updated successfully
+
+  [root@nixos:~]#
+  ```
+
+  4. **Partitionnement LVM via `gdisk` :**
 
 Pour réinitialiser le disque, lancez `gdisk` et utilisez successivement les options `x` et `z` :
 ```bash
+[nixos@nixos:~]$ sudo su -
 [root@nixos:~]# gdisk /dev/sda
 GPT fdisk (gdisk) version 1.0.10
 
@@ -156,24 +182,7 @@ sda     8:0    0   60G  0 disk
 sr0    11:0    1  1.1G  0 rom  /iso
 ```
 
-Option 1°) BIOS/MBR (`fdisk`) :
-```
-  Device     Boot    Start       End   Sectors  Size Id Type
-  /dev/sda1  *        2048   2099199   2097152    1G 83 Linux
-  /dev/sda2        2099200  10487807   8388608    4G 82 Linux swap
-  /dev/sda3       10487808 117231407 106743600 50.9G 83 Linux
-```
-
-Option 2°)  BIOS/GPT (`gdisk`) :
-```
-  Device        Start       End   Sectors  Size Type
-  /dev/sda1      2048      4095      2048    1M BIOS boot
-  /dev/sda2      4096   2101247   2097152    1G Linux filesystem
-  /dev/sda3   2101248  10489855   8388608    4G Linux swap
-  /dev/sda4  10489856 117229567 106739712 50.9G Linux filesystem
-```
-
-Option 3°)  UEFI/GPT (`gdisk`) :
+Schéma de partitionnement UEFI/GPT souhaité :
 ```
   Device        Start       End   Sectors  Size Type
   /dev/sda1      2048    206847    204800  100M EFI System
