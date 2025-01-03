@@ -13,3 +13,4 @@ Feuille de route pour un poste de travail sous NixOS.
 - [x] Système de base (UEFI)
 - [ ] Partitionnement LVM via `gdisk`
 - [ ] Connection WIFI
+- [ ] Configuration SSH + Changement des mots de passe
