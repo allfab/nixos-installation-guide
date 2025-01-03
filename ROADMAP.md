@@ -3,7 +3,13 @@
 Feuille de route pour un poste de travail sous NixOS.
 
 
-## Système de base
+## Préparatifs
+
+- [x] Support d'installation
+- [x] Configuration du BIOS/UEFI
+
+## Préréglages / Configuration du système
 
 - [x] Système de base (UEFI)
-- [ ] Coming soon
+- [ ] Partitionnement LVM via `gdisk`
+- [ ] Connection WIFI

@@ -63,22 +63,50 @@ Une fois dans le menu du UEFI :
 4. **Assurez-vous que le démarrage à partir de l'USB est activé**.
 
 
-## PRÉRÉGLAGES / CONFIGURATION 
+## PRÉRÉGLAGES / CONFIGURATION DU SYSTÈME
 
-- Changer la disposition du clavier (passer d'un clavier QWERTY à un clavier AZERTY) :
+> [!NOTE]
+> On effectue cette configuration tout de suite après avoir démarrez/bootez la machine via le support d'installation de NixOS.
+
+```bash
+[root@nixos:~]# loadkeys fr-latin1
+```
+
+1. Changer la disposition du clavier (passer d'un clavier QWERTY à un clavier AZERTY) :
+
+```bash
+[root@nixos:~]# loadkeys fr-latin1
+```
+
+
+2. **Démarrez le service `wpa_supplicant` et configurez le WiFi avec `wpa_cli` :**
+
+```bash
+[root@nixos:~]# sudo systemctl start wpa_supplicant
+[root@nixos:~]# wpa_cli
+```
+
+Dans `wpa_cli`, saisissez :
 
   ```bash
-  [root@nixos:~]# loadkeys fr-latin1
+  add_network
+  0
+  set_network 0 ssid "myhomenetwork"
+  OK
+  set_network 0 psk "mypassword"
+  OK
+  set_network 0 key_mgmt WPA-PSK
+  OK
+  enable_network 0
+  OK
   ```
 
-- Configuration WIFI :
-
+  Ensuite, quittez `wpa_cli` :
   ```bash
-  [root@nixos:~]# ...
+  quit
   ```
 
-
-## Partitionnement
+## Partitionnement du disque
 
 Pour réinitialiser le disque, lancez `gdisk` et utilisez successivement les options `x` et `z` :
 ```bash
