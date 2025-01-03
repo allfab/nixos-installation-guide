@@ -495,3 +495,52 @@ nixos login: nixos (automatic login)
               └─nixos-root lvm  root                                      ext4        54.5G 
             sr0            rom  nixos-minimal-24.11-x86_64 /iso           iso9660      1.1G       0
             ```
+
+---
+
+6. **Montage des partitions**
+
+    **Montage de la partition `root` :**
+
+    ```bash
+    [root@nixos:~]# mount /dev/nixos/root /mnt
+    ```
+
+    **Création des répertoires nécessaires :**
+
+    ```bash
+    [root@nixos:~]# mkdir -p /mnt/boot
+    ```
+
+    **Montage de la partition `boot` :**
+
+    ```bash
+    [root@nixos:~]# mount /dev/sda2 /mnt/boot
+    ```
+
+    **Montage de la partition `home` (si séparée) :**
+
+    ```bash
+    [root@nixos:~]# mount /dev/nixos/home /mnt/home
+    ```
+
+    **Activation de la Swap :**
+
+    ```bash
+    [root@nixos:~]# swapon /dev/nixos/swap
+    ```
+
+    **Vérification :**
+
+    ```bash
+    [root@nixos:~]# lsblk -o NAME,TYPE,LABEL,MOUNTPOINT,FSTYPE,SIZE,FSAVAIL
+    NAME           TYPE LABEL                      MOUNTPOINT     FSTYPE       SIZE FSAVAIL
+    loop0          loop                            /nix/.ro-store squashfs     1.1G       0
+    sda            disk                                                         60G 
+    ├─sda1         part EFI                                       vfat         512M 
+    ├─sda2         part boot                       /mnt/boot      ext4           1G  905.9M
+    └─sda3         part                                           LVM2_member 58.5G 
+      ├─nixos-swap lvm  swap                       [SWAP]         swap           4G 
+      └─nixos-root lvm  root                       /mnt           ext4        54.5G   50.6G
+    sr0            rom  nixos-minimal-24.11-x86_64 /iso           iso9660      1.1G       0
+    ```
