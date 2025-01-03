@@ -1,6 +1,6 @@
 # Guide d'installation de NixOS
 
-## Introduction
+## INTRODUCTION
 
 **Prérequis :**
 
@@ -15,7 +15,7 @@
 sudo -i
 ```
 
-## Préparations
+## PRÉPARATIONS
 
 ### Support d'installation
 
@@ -51,12 +51,11 @@ sudo -i
         
         **Remarque :** cette commande effacera toutes les données de la clé USB. Remplacez `<ISO_FILE>` par le nom de votre fichier ISO.
 
-
-### Configuration du système
+### Configuration du BIOS/UEFI
 
 Certains paramètres système UEFI doivent être ajustés pour l'installation de NixOS. Pour trouver les étapes exactes pour votre machine, effectuez une recherche rapide sur le Web pour votre modèle. Par exemple, sur mon Framework, vous appuyez sur « F12 » au démarrage pour accéder au menu UEFI.
 
-Une fois dans le menu :
+Une fois dans le menu du UEFI :
 
 1. **Assurez-vous que le démarrage sécurisé est désactivé**.
 2. **Assurez-vous que le démarrage rapide est désactivé**.
@@ -64,12 +63,20 @@ Une fois dans le menu :
 4. **Assurez-vous que le démarrage à partir de l'USB est activé**.
 
 
-## Processus d'installation
+## PRÉRÉGLAGES / CONFIGURATION 
 
-Changer la disposition du clavier (passer d'un clavier QWERTY à un clavier AZERTY) :
-```bash
-sudo loadkeys fr-latin1
-```
+- Changer la disposition du clavier (passer d'un clavier QWERTY à un clavier AZERTY) :
+
+  ```bash
+  [root@nixos:~]# loadkeys fr-latin1
+  ```
+
+- Configuration WIFI :
+
+  ```bash
+  [root@nixos:~]# ...
+  ```
+
 
 ## Partitionnement
 
