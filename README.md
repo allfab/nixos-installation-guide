@@ -544,3 +544,65 @@ nixos login: nixos (automatic login)
       └─nixos-root lvm  root                       /mnt           ext4        54.5G   50.6G
     sr0            rom  nixos-minimal-24.11-x86_64 /iso           iso9660      1.1G       0
     ```
+
+## INSTALLATION DU SYSTÈME
+
+### 5. Générer la configuration NixOS :
+
+  1. **Générer la configuration NixOS :**
+
+      ```bash
+      [root@nixos:~]# nixos-generate-config --root /mnt
+      writing /mnt/etc/nixos/hardware-configuration.nix...
+      writing /mnt/etc/nixos/configuration.nix...
+      For more hardware-specific settings, see https://github.com/NixOS/nixos-hardware.
+
+      [root@nixos:~]# ll /mnt/etc/nixos/
+      total 12
+      -rw-r--r-- 1 root root 4428 Jan  4 22:14 configuration.nix
+      -rw-r--r-- 1 root root 1384 Jan  4 22:14 hardware-configuration.nix
+      ```
+
+  2. **En option, télécharger votre fichier de configuration :**
+
+      Si vous n'avez pas votre propre fichier de configuration, vous pouvez télécharger le mien pour référence :
+      ```bash
+      curl -o /mnt/etc/nixos/configuration.nix https://raw.githubusercontent.com/allfab/nixos-installation-guide/main/etc/nixos/configuration.nix
+      ```
+
+      **Remarque :** ce fichier est personnalisé pour ma configuration. Les modifications courantes que vous devrez peut-être effectuer incluent :
+      - **Mise à jour des UUID ou des chemins de partition**,
+      - **Activation ou désactivation des services**,
+      - **Installation ou suppression d'applications**,
+      - **Configuration de l'environnement de bureau** (si nécessaire).
+
+      Pour créer votre propre configuration, suivez ces étapes :
+      1. **Apprenez les bases de Nix**,
+      2. **Consultez le manuel**,
+      3. **Consultez mon fichier de configuration**.
+
+
+  3. **Accédez au répertoire de configuration et modifiez le fichier de configuration à l'aide de `vim` ou `nano` ou quel que soit votre éditeur de texte :**
+
+      ```bash
+      [root@nixos:~]# cd /mnt/etc/nixos
+
+      [root@nixos:/mnt/etc/nixos]# ll
+      total 12
+      -rw-r--r-- 1 root root 4428 Jan  4 22:14 configuration.nix
+      -rw-r--r-- 1 root root 1384 Jan  4 22:14 hardware-configuration.nix
+
+      [root@nixos:/mnt/etc/nixos]# vi configuration.nix
+      ```
+
+      ***Effectuez les modifications nécessaires pour qu'elles correspondent à votre configuration.***
+
+4. **Installez NixOS :**
+```sh
+nixos-install
+```
+
+5. **Redémarrez le système :**
+```sh
+reboot
+```
