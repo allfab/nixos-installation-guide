@@ -147,6 +147,18 @@ nixos login: nixos (automatic login)
     ```
 
 4. **Partitionnement, formatage et montage :**
+  > [!IMPORTANT]
+  > Nous avons 2 options au niveau du partitionnement :
+  > - Option#1 : `GPT/UEFI`,
+  > - Option#2 : `MBR/BIOS`.
+  > 
+  > Je vous recommande de choisir l'option#2 `MBR/BIOS` uniquement si vous avez un très vieux ordinateur (non compatible UEFI) ou si vous utilisez une machine virtuelle (VM).
+  >
+  > Si ce n'est pas le cas, choisissez l'option#1 `GPT/UEFI`.
+
+  > [!TIP]
+  > Il est possible de partir sur l'option#1 `GPT/UEFI` dans une VM sur `VirtualBox` en activant l'option `Activer EFI (OS spéciaux seulement)` dans l'onglet `System` du menu de configuration de la VM.
+
     1. **Option#1 (GPT/UEFI) :**
         1. **Identifiez le disque à partitionner :**
             ```bash
@@ -158,18 +170,6 @@ nixos login: nixos (automatic login)
             ```
             > [!NOTE]
             > Ici, nous utiliserons le disque `/dev/sda` de 60GB.
-
-            > [!IMPORTANT]
-            > Nous avons 2 options au niveau du partitionnement :
-            > - Option#1 : `GPT/UEFI`,
-            > - Option#2 : `MBR/BIOS`.
-            > 
-            > Je vous recommande de choisir l'option#2 `MBR/BIOS` uniquement si vous avez un très vieux ordinateur (non compatible UEFI) ou si vous utilisez une machine virtuelle (VM).
-            >
-            > Si ce n'est pas le cas, choisissez l'option#1 `GPT/UEFI`.
-
-            > [!TIP]
-            > Il est possible de partir sur l'option#1 `GPT/UEFI` dans une VM sur `VirtualBox` en activant l'option `Activer EFI (OS spéciaux seulement)` dans l'onglet `System` du menu de configuration de la VM.
 
         2. **Pour réinitialiser le disque, lancez `gdisk` et utilisez successivement les options `x` et `z` :**
             ```bash
