@@ -159,43 +159,43 @@ nixos login: nixos (automatic login)
   > [!TIP]
   > Il est possible de partir sur l'option#1 `GPT/UEFI` dans une VM sur `VirtualBox` en activant l'option `Activer EFI (OS spéciaux seulement)` dans l'onglet `System` du menu de configuration de la VM.
 
-    1. **Option#1 (GPT/UEFI) :**
-        1. **Identifiez le disque à partitionner :**
-            ```bash
-            [root@nixos:~]# lsblk 
-            NAME  MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
-            loop0   7:0    0  1.1G  1 loop /nix/.ro-store
-            sda     8:0    0   60G  0 disk 
-            sr0    11:0    1  1.1G  0 rom  /iso
-            ```
-            > [!NOTE]
-            > Ici, nous utiliserons le disque `/dev/sda` de 60GB.
+  1. **Option#1 (GPT/UEFI) :**
+      1. **Identifiez le disque à partitionner :**
+          ```bash
+          [root@nixos:~]# lsblk 
+          NAME  MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+          loop0   7:0    0  1.1G  1 loop /nix/.ro-store
+          sda     8:0    0   60G  0 disk 
+          sr0    11:0    1  1.1G  0 rom  /iso
+          ```
+          > [!NOTE]
+          > Ici, nous utiliserons le disque `/dev/sda` de 60GB.
 
-        2. **Pour réinitialiser le disque, lancez `gdisk` et utilisez successivement les options `x` et `z` :**
-            ```bash
-            [nixos@nixos:~]$ sudo su -
-            [root@nixos:~]# gdisk /dev/sda
-            GPT fdisk (gdisk) version 1.0.10
+      2. **Pour réinitialiser le disque, lancez `gdisk` et utilisez successivement les options `x` et `z` :**
+          ```bash
+          [nixos@nixos:~]$ sudo su -
+          [root@nixos:~]# gdisk /dev/sda
+          GPT fdisk (gdisk) version 1.0.10
 
-            Partition table scan:
-              MBR: protective
-              BSD: not present
-              APM: not present
-              GPT: present
+          Partition table scan:
+            MBR: protective
+            BSD: not present
+            APM: not present
+            GPT: present
 
-            Found valid GPT with protective MBR; using GPT.
+          Found valid GPT with protective MBR; using GPT.
 
-            Command (? for help): x
+          Command (? for help): x
 
-            Expert command (? for help): z
-            About to wipe out GPT on /dev/sda. Proceed? (Y/N): Y
-            GPT data structures destroyed! You may now partition the disk using fdisk or
-            other utilities.
-            Blank out MBR? (Y/N): Y
-            ```
+          Expert command (? for help): z
+          About to wipe out GPT on /dev/sda. Proceed? (Y/N): Y
+          GPT data structures destroyed! You may now partition the disk using fdisk or
+          other utilities.
+          Blank out MBR? (Y/N): Y
+          ```
 
-            > [!NOTE]
-            > Un redémarrage du système est nécessaire.
+          > [!NOTE]
+          > Un redémarrage du système est nécessaire.
 
         3. **Schéma de partitionnement UEFI/GPT souhaité avec 4G de RAM :**
             ```
