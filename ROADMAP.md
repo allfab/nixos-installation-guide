@@ -19,7 +19,7 @@ Feuille de route pour un poste de travail sous NixOS.
 
 ## Installation et configuration des utilitaires
 - [x] Installation d'`htop`
-- [x] Configuration d'`htop` (faire apparaître la métrique `zram` par défaut sur le tableau de bord),
+- [ ] Configuration d'`htop` (faire apparaître la métrique `zram` par défaut sur le tableau de bord),
 - [x] Installation de vim
 - [ ] Configuration de `vim` (personnalisation via ~/.vimrc),
 
