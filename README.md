@@ -148,14 +148,14 @@ nixos login: nixos (automatic login)
 
 4. **Partitionnement, formatage et montage :**
 
-    > [!NOTE]
-    > Nous avons 2 options au niveau du partitionnement :
-    > - Option#1 : `GPT/UEFI`,
-    > - Option#2 : `MBR/BIOS`.
-    > 
-    > Je vous recommande de choisir l'option#2 `MBR/BIOS` uniquement si vous avez un très vieux ordinateur (non compatible UEFI) ou si vous utilisez une machine virtuelle (VM).
-    >
-    > Si ce n'est pas le cas, choisissez l'option#2 `GPT/UEFI` (possible dans un VM en activant les options EFI sous VirtualBox pour exemple).
+> [!NOTE]
+> Nous avons 2 options au niveau du partitionnement :
+> - Option#1 : `GPT/UEFI`,
+> - Option#2 : `MBR/BIOS`.
+> 
+> Je vous recommande de choisir l'option#2 `MBR/BIOS` uniquement si vous avez un très vieux ordinateur (non compatible UEFI) ou si vous utilisez une machine virtuelle (VM).
+>
+> Si ce n'est pas le cas, choisissez l'option#2 `GPT/UEFI` (possible dans un VM en activant les options EFI sous VirtualBox pour exemple).
 
     1. **Option#1 (GPT/UEFI) :**
 
