@@ -516,10 +516,10 @@ nixos login: nixos (automatic login)
               ```bash
               [root@nixos:~]# nixos-generate-config --root /mnt
               ```
-              > [!important]
-              > Même si vous possédez un fichier de configuration Nix, il est fortement conseillé de réaliser cette étape.
-              > 
-              > En effet, cette étape permet de créer le fichier de configuration `/mnt/etc/nixos/hardware-configuration.nix` avec les options de montages des différentes partitions que nous venons de créer.
+                > [!important]
+                > Même si vous possédez un fichier de configuration Nix, il est fortement conseillé de réaliser cette étape.
+                > 
+                > En effet, cette étape permet de créer le fichier de configuration `/mnt/etc/nixos/hardware-configuration.nix` avec les options de montages des différentes partitions que nous venons de créer.
 
           2. Récupérartion de mon fichier de configuration NixOS :
               ```bash
