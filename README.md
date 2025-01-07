@@ -512,10 +512,13 @@ nixos login: nixos (automatic login)
 
   2. **Option#2 (MBR/BIOS) :**
       1. Fichier de configuration NixOS :        
-          1. Générer le fichier de configuration NixOS pour une installation standard en mode serveur :
+          1. Générer le fichier de configuration NixOS pour une installation standard :
               ```bash
               [root@nixos:~]# nixos-generate-config --root /mnt
               ```
+
+              > [!important]
+              > Même si vous possédez un fichier de configuration Nix, il est fortement conseillé de réaliser cette étape. En effet, cette étape permet de créer le fichier de configuration `/mnt/etc/nixos/hardware-configuration.nix` avec les options de montages des différentes partitions que nous venons de créer.
 
           2. Récupérartion de mon fichier de configuration NixOS :
               ```bash
