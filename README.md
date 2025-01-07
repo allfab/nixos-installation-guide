@@ -492,6 +492,7 @@ nixos login: nixos (automatic login)
 > Même si vous possédez un fichier de configuration Nix, il est fortement conseillé de réaliser cette étape.
 > 
 > En effet, cette étape permet de créer le fichier de configuration `/mnt/etc/nixos/hardware-configuration.nix` avec les options de montages des différentes partitions que nous venons de créer.
+> Il est ensuite possible de venir modifier le fichier `/mnt/etc/nixos/configuration.nix` ou de l'écraser avec son propre fichier de configuration Nix.
 
   1. **Option#1 (GPT/UEFI) :**
       1. Fichier de configuration NixOS :        
