@@ -94,6 +94,12 @@
   # Programs with options
   programs.firefox.enable = true;
   programs.htop.enable = true;
+  programs.htop.settings = {
+    column_meters_0="System AllCPUs Memory Swap Zram";
+    column_meter_modes_0="2 1 1 1 1";
+    column_meters_1="SELinux Tasks LoadAverage Uptime";
+    column_meter_modes_1="2 2 2 2";
+  };
   # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   # programs.vim.enable = true;
   # programs.vim.package = pkgs.vim-full;
@@ -135,7 +141,7 @@
  
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-  services.openssh.settings.PermitRootLogin = "no";
+  services.openssh.settings.PermitRootLogin = "yes";
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
