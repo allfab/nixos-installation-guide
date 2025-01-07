@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./desktop-environment/gnome.nix
+      # ./desktop-environment/kde.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -18,6 +19,9 @@
   # System
   zramSwap.enable = true;
   boot.kernel.sysctl = { "vm.swappiness" = 10; };
+
+  # Packages Repo
+  nixpkgs.config.allowUnfree = true;
 
   # networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -91,9 +95,9 @@
   programs.firefox.enable = true;
   programs.htop.enable = true;
   # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  programs.vim.enable = true;
-  programs.vim.package = pkgs.vim-full;
-  programs.vim.defaultEditor = true;
+  # programs.vim.enable = true;
+  # programs.vim.package = pkgs.vim-full;
+  # programs.vim.defaultEditor = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -103,6 +107,7 @@
     ghostty
     git
     nmon
+    (import ./apps/vim/default.nix)
     wget
   ];
 
@@ -122,11 +127,12 @@
   #   enableSSHSupport = true;
   # };
 
+  # Virtualisation
+  # services.qemuGuest.enable = true;
+  # virtualisation.virtualbox.guest.enable = true;
+
   # List services that you want to enable:
-
-  # VMs Agents
-  services.qemuGuest.enable = true;
-
+ 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   services.openssh.settings.PermitRootLogin = "yes";
